@@ -4,6 +4,7 @@
 
 RGB colors[MAX_COLORS] =
     {
+        {15, 150, 120},  // BASE BACKGROUND COLOR
         {0, 0, 0},       // BLACK
         {125, 125, 125}, // GRAY
         {255, 255, 255}, // WHITE
@@ -12,7 +13,7 @@ RGB colors[MAX_COLORS] =
         {0, 0, 255},     // BLUE
 };
 
-int num_colors = 6;
+int num_colors = 7;
 
 COLOR RGB8(RGB value)
 {
@@ -21,7 +22,7 @@ COLOR RGB8(RGB value)
 
 void setup_vid_base_pal()
 {
-    for (int i = 0; i < sizeof(colors) / sizeof(colors[0]); i++)
+    for (int i = 0; i < num_colors; i++)
     {
         ((u16 *)MEM_PAL)[i] = RGB8(colors[i]);
     }
@@ -35,6 +36,10 @@ void add_vid_pal(u8 r, u8 g, u8 b)
         colors[num_colors++] = clr;
         ((u16 *)MEM_PAL)[num_colors - 1] = RGB8(clr);
     }
+}
+
+void change_bg_clr(int clrid){
+    ((u16 *)MEM_PAL)[0] = RGB8(colors[clrid]);
 }
 
 void plot(int x, int y, u8 clrid)
