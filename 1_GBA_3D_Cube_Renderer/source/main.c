@@ -49,7 +49,6 @@ int main()
 
     int xpos = 1;
     int frame = 0;
-    char msg[120];
 
     while (1)
     {
