@@ -1,6 +1,8 @@
 #ifndef MAIN_H
 #define MAIN_H
 
+typedef unsigned char u8;
+
 typedef unsigned short u16;
 typedef volatile u16 vu16;
 typedef u16 COLOR;
@@ -15,7 +17,8 @@ typedef volatile u32 vu32;
 #define MEM_PAL		0x05000000
 #define MEM_VRAM	0x06000000
 
-#define VRAM_PAGE_SIZE  0x18000
+#define M4_SIZE			0x09600
+#define VRAM_PAGE_SIZE  0x0A000
 
 #define MEM_VRAM_BACK   (MEM_VRAM + VRAM_PAGE_SIZE)
 
@@ -31,6 +34,11 @@ typedef volatile u32 vu32;
 #define DCNT_MODE4		0x0004	//!< Mode 4; bg2: 240x160\@8 bitmap
 #define DCNT_PAGE       0x0010
 #define DCNT_BG2		0x0400	//!< Enable bg 2
+
+#define SCREEN_WIDTH	240
+#define SCREEN_HEIGHT	160
+#define M4_WIDTH	SCREEN_WIDTH
+#define M4_HEIGHT	SCREEN_HEIGHT
 
 INLINE void vid_vsync();
 u16 *vid_flip();
