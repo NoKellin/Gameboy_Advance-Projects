@@ -21,5 +21,4 @@ void change_bg_clr(int clrid);
 
 void plot(int x, int y, u8 clrid);
 
-
 #endif

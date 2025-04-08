@@ -1,8 +1,7 @@
 #ifndef DEBUG_H
 #define DEBUG_H
 
-#include <stdio.h>
-#include <stdbool.h>
+#include "types.h"
 
 #define NOCASH_SIG      ((char*)0x0FFFA00)
 #define REG_NOCASH_LOG  VOLADDR(0x04FFFA1C, unsigned char)
