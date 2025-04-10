@@ -1,6 +1,6 @@
 #include "main.h"
 
-char key[32];
+char position[32];
 
 int main()
 {
@@ -21,15 +21,25 @@ int main()
         scan_keys();
         
         // --- UPDATE INFO ---
-        xpos++;
-        
-        if(xpos > SCREEN_WIDTH) xpos = 0;
-        
-        sprintf(key, "key %04X is pressed", curr_key_input);
-        if(get_key(KEY_START) && get_key_up(KEY_B)){
-            logOutputNoCash(0, key);
+        if(get_key_down(KEY_LEFT))
+        {
+            xpos--;
+            if(xpos < 0) xpos = SCREEN_WIDTH - 1;
+
+            sprintf(position, "position: %d", xpos);
+            logOutputNoCash(0, position);
+
+        }
+        else if(get_key_down(KEY_RIGHT)) 
+        {
+            xpos++;
+            if(xpos > SCREEN_WIDTH - 1) xpos = 0;
+
+            sprintf(position, "position: %d", xpos);
+            logOutputNoCash(0, position);
         }
         
+
         // --- DRAW NEW INFO ---        
         plot(xpos, 10, BLACK);
 

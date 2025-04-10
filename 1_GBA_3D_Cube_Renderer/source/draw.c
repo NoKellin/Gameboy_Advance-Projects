@@ -44,7 +44,7 @@ void change_bg_clr(int clrid){
 
 void plot(int x, int y, u8 clrid)
 {
-    u16 *dst = &vid_page[(y * 240 + x) >> 1];
+    u16 *dst = &vid_page[(y * SCREEN_WIDTH + x) >> 1];
     if (x & 1)
     {
         *dst = (*dst & 0xFF) | (clrid << 8);
