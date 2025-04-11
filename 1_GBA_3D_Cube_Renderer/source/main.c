@@ -2,6 +2,17 @@
 
 char position[32];
 
+typedef struct {
+    int x;
+    int y;
+    int z;
+}vertex;
+
+typedef struct {
+    vertex vert[3];
+}triangle;
+
+
 int main()
 {
     REG_DISPCNT = DCNT_MODE4 | DCNT_BG2;
@@ -9,7 +20,10 @@ int main()
 
     change_bg_clr(WHITE);
 
-    int xpos = 0;
+    triangle tri;
+    tri.vert[0] = (vertex){10, 10, 0};
+    tri.vert[1] = (vertex){30, 10, 0};
+    tri.vert[2] = (vertex){10, 30, 0};
 
     while (1)
     {
@@ -21,27 +35,14 @@ int main()
         scan_keys();
         
         // --- UPDATE INFO ---
-        if(get_key_down(KEY_LEFT))
-        {
-            xpos--;
-            if(xpos < 0) xpos = SCREEN_WIDTH - 1;
-
-            sprintf(position, "position: %d", xpos);
-            logOutputNoCash(0, position);
-
-        }
-        else if(get_key_down(KEY_RIGHT)) 
-        {
-            xpos++;
-            if(xpos > SCREEN_WIDTH - 1) xpos = 0;
-
-            sprintf(position, "position: %d", xpos);
-            logOutputNoCash(0, position);
-        }
-        
+       
 
         // --- DRAW NEW INFO ---        
-        plot(xpos, 10, BLACK);
+        
+        for (int v = 0; v < 3; v++)
+        {
+            plot(tri.vert[v].x, tri.vert[v].y, RED);
+        }
 
         // --- SHOW NEW INFO ---
         vid_flip();
