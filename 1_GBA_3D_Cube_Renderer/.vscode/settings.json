@@ -4,6 +4,7 @@
         "memory.h": "c",
         "types.h": "c",
         "video.h": "c",
-        "draw.h": "c"
+        "draw.h": "c",
+        "vector": "cpp"
     }
 }

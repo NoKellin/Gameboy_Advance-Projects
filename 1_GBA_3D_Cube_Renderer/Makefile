@@ -11,22 +11,22 @@ PROJ    := 3DRenderer
 TARGET  := $(PROJ)
 BUILD_DIR := build
 
-SOURCES := $(wildcard source/*.c)
+SOURCES := $(wildcard source/*.cpp)
 HEADERS := $(wildcard include/*.h)
 
-OBJS    := $(SOURCES:source/%.c=$(BUILD_DIR)/%.o)
+OBJS    := $(SOURCES:source/%.cpp=$(BUILD_DIR)/%.o)
 
 # --- Build defines ---------------------------------------------------
 
 PREFIX  := $(DEVKITARM)/bin/arm-none-eabi-
-CC     := $(PREFIX)gcc
-LD      := $(PREFIX)gcc
+CXX     := $(PREFIX)g++
+LD      := $(PREFIX)g++
 OBJCOPY := $(PREFIX)objcopy
 
 ARCH    := -mthumb-interwork -mthumb
 SPECS   := -specs=gba.specs
 
-CFLAGS  := $(ARCH) -O2 -Wall -fno-strict-aliasing -Iinclude
+CXXFLAGS  := $(ARCH) -O2 -Wall -fno-strict-aliasing -Iinclude
 LDFLAGS := $(ARCH) $(SPECS)
 
 
@@ -46,8 +46,8 @@ $(BUILD_DIR)/$(TARGET).elf : $(OBJS)
 	@$(LD) $^ $(LDFLAGS) -o $@
 
 # Compile (step 1)
-$(BUILD_DIR)/%.o : source/%.c $(HEADERS)
-	@$(CC) -c $< $(CFLAGS) -o $@
+$(BUILD_DIR)/%.o : source/%.cpp $(HEADERS)
+	@$(CXX) -c $< $(CXXFLAGS) -o $@
 
 # --- Clean -----------------------------------------------------------
 clean : 
