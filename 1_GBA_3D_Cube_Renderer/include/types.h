@@ -14,6 +14,8 @@ typedef unsigned int u32;
 
 typedef volatile u32 vu32;
 
+typedef signed int s32;
+
 #define INLINE static inline
 
 typedef struct {

@@ -2,6 +2,7 @@
 #define MAIN_H
 
 #include "types.h"
+#include "maths.h"
 #include "memory.h"
 #include "video.h"
 #include "draw.h"

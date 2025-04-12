@@ -1,5 +1,5 @@
 #include "draw.h"
-#include <cmath>
+#include "maths.h"
 
 #define MAX_COLORS 256
 
