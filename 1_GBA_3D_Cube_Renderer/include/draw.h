@@ -20,5 +20,7 @@ void add_vid_pal(u8 r, u8 g, u8 b);
 void change_bg_clr(int clrid);
 
 void plot(int x, int y, u8 clrid);
+void draw_line(int x1, int y1, int x2, int y2, u8 clrid);
+void draw_triangle(int x1, int y1, int x2, int y2, int x3, int y3, u8 clrid);
 
 #endif

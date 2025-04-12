@@ -38,7 +38,8 @@ void add_vid_pal(u8 r, u8 g, u8 b)
     }
 }
 
-void change_bg_clr(int clrid){
+void change_bg_clr(int clrid)
+{
     ((u16 *)MEM_PAL)[0] = RGB8(colors[clrid]);
 }
 
@@ -53,4 +54,25 @@ void plot(int x, int y, u8 clrid)
     {
         *dst = (*dst & ~0xFF) | clrid;
     }
+}
+
+void draw_line(int x1, int y1, int x2, int y2, u8 clrid)
+{
+    int deltaY = y2 - y1;
+    int deltaX = x2 - x1;
+    
+    if(deltaX == 0) {deltaX = 1;}
+
+    int startX = x1;
+
+    for(int x = x1; x < x2; x++)
+    {
+        int y = deltaY * (x - startX + 0.5f) / deltaX + y1;
+        plot(x, y, clrid);
+    }
+
+}
+
+void draw_triangle(int x1, int y1, int x2, int y2, int x3, int y3, u8 clrid)
+{
 }

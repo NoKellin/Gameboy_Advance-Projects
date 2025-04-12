@@ -28,6 +28,12 @@
 
 extern COLOR *vid_page;
 
+#define IWRAM_CODE __attribute__((section(".iwram"), long_call))
+extern "C" IWRAM_CODE void memset32(void *dst, u32 wd, u32 wcount);
+
+
+#define M4_CLEAR()  memset32(vid_page, 0, M4_SIZE/4)
+
 void vid_vsync();
 void clear_screen();
 COLOR *vid_flip();

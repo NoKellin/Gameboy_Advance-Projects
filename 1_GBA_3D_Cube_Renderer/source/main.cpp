@@ -1,22 +1,6 @@
 #include "main.h"
-#include <vector>
 
-typedef struct
-{
-    float x;
-    float y;
-    float z;
-} point;
-
-typedef struct
-{
-    point p[3];
-} triangle;
-
-typedef struct
-{
-    std::vector<triangle> tris;
-} mesh;
+char y[32];
 
 int main()
 {
@@ -25,39 +9,13 @@ int main()
 
     change_bg_clr(WHITE);
 
-    mesh cube;
-    cube.tris = {
-        // SOUTH
-        {0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f, 0.0f},
-        {0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 1.0f, 0.0f, 0.0f},
-
-        // EAST
-        {1.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 1.0f, 1.0f, 1.0f},
-        {1.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f},
-
-        // NORTH
-        {1.0f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f, 1.0f},
-        {1.0f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f},
-
-        // WEST
-        {0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f, 0.0f, 1.0f, 0.0f},
-        {0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f},
-
-        // TOP
-        {0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f},
-        {0.0f, 1.0f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f},
-
-        // BOTTOM
-        {1.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f},
-        {1.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f},
-
-    };
+    int yPos = 40;
 
     while (1)
     {
         // --- WAIT FOR NEW UPDATE ---
         vid_vsync();
-
+        
         // --- REMOVE OLD INFO ---
         clear_screen();
         scan_keys();
@@ -65,6 +23,20 @@ int main()
         // --- UPDATE INFO ---
 
         // --- DRAW NEW INFO ---
+
+        if(get_key(KEY_DOWN)){
+            yPos++;
+            sprintf(y, "%d", yPos);
+            logOutputNoCash(0,y);
+        }
+        else if(get_key(KEY_UP)){
+            yPos--;
+            sprintf(y, "%d", yPos);
+            logOutputNoCash(0,y);
+        }
+
+        // draw_line(30, yPos, 60, yPos, GREEN);
+        plot(30, yPos, RED);
 
         // --- SHOW NEW INFO ---
         vid_flip();
