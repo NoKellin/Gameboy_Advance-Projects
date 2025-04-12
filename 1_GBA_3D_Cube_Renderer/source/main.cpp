@@ -7,7 +7,7 @@ int main()
     REG_DISPCNT = DCNT_MODE4 | DCNT_BG2;
     setup_vid_base_pal();
 
-    change_bg_clr(GRAY);
+    change_bg_clr(BLACK);
 
     int xPos = 30;
     int yPos = 40;
@@ -39,8 +39,9 @@ int main()
             xPos++;
         }
 
-        draw_line(xPos, 30, 60, yPos, GREEN);
         // plot(30, yPos, RED);
+        // draw_line(xPos, 30, 60, yPos, GREEN);
+        draw_triangle(xPos, 15, xPos, 60, 70, yPos, RED);
 
         // --- SHOW NEW INFO ---
         vid_flip();
