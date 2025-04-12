@@ -7,8 +7,9 @@ int main()
     REG_DISPCNT = DCNT_MODE4 | DCNT_BG2;
     setup_vid_base_pal();
 
-    change_bg_clr(WHITE);
+    change_bg_clr(GRAY);
 
+    int xPos = 30;
     int yPos = 40;
 
     while (1)
@@ -26,17 +27,20 @@ int main()
 
         if(get_key(KEY_DOWN)){
             yPos++;
-            sprintf(y, "%d", yPos);
-            logOutputNoCash(0,y);
         }
         else if(get_key(KEY_UP)){
             yPos--;
-            sprintf(y, "%d", yPos);
-            logOutputNoCash(0,y);
         }
 
-        // draw_line(30, yPos, 60, yPos, GREEN);
-        plot(30, yPos, RED);
+        if(get_key(KEY_LEFT)){
+            xPos--;
+        }
+        else if(get_key(KEY_RIGHT)){
+            xPos++;
+        }
+
+        draw_line(xPos, 30, 60, yPos, GREEN);
+        // plot(30, yPos, RED);
 
         // --- SHOW NEW INFO ---
         vid_flip();
