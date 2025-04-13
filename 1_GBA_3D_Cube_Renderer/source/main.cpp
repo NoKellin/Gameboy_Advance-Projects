@@ -24,11 +24,13 @@ int main()
     REG_TM3CNT = TM_ENABLE | TM_CASCADE;
 
     u32 sec = -1;
+    u32 frames = 0;
 
     while (1)
     {
         // --- WAIT FOR NEW UPDATE ---
         vid_vsync();
+        frames++;
 
         // --- REMOVE OLD INFO ---
         clear_screen();
@@ -39,8 +41,9 @@ int main()
         if (REG_TM3D != sec)
         {
             sec = REG_TM3D;
-            sprintf(ts, "%02d:%02d:%02d", sec / 3600, (sec % 3600) / 60, sec % 60);
+            sprintf(ts, "%02d:%02d:%02d | Frames: %u", sec / 3600, (sec % 3600) / 60, sec % 60, frames);
             logOutputNoCash(0, ts);
+            frames = 0;
         }
 
         if (get_key_down(KEY_START))
