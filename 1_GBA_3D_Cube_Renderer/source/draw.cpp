@@ -59,8 +59,8 @@ void plot(int x, int y, u8 clrid)
 
 void draw_line(int x1, int y1, int x2, int y2, u8 clrid)
 {
-    int dx = abs(x2 - x1);
-    int dy = -abs(y2 - y1);
+    int dx = abs32(x2 - x1);
+    int dy = -abs32(y2 - y1);
     int sx = x1 < x2 ? 1 : -1;
     int sy = y1 < y2 ? 1 : -1;
     int err = dx + dy;

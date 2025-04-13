@@ -3,6 +3,6 @@
 
 #include "types.h"
 
-s32 abs(s32 val);
+s32 abs32(s32 val);
 
 #endif
