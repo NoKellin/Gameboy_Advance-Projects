@@ -21,5 +21,7 @@
 extern bool logInitNoCash();
 extern void logOutputNoCash(unsigned char level, const char* message);
 
+void print_frames_per_second(char *text, vu16 timer_data, u32 &sec, u32 &frames);
+
 
 #endif

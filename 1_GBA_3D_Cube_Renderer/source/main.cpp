@@ -1,15 +1,5 @@
 #include "main.h"
 
-#define REG_TM2D *(vu16 *)(REG_BASE + 0x0108)
-#define REG_TM2CNT *(vu16 *)(REG_BASE + 0x010A)
-
-#define REG_TM3D *(vu16 *)(REG_BASE + 0x010C)
-#define REG_TM3CNT *(vu16 *)(REG_BASE + 0x010E)
-
-#define TM_CASCADE 0x0004
-#define TM_FREQ_1024 0x0003
-#define TM_ENABLE 0x0080
-
 char ts[32];
 
 int main()
@@ -20,6 +10,7 @@ int main()
 
     REG_TM2D = -0x4000;
     REG_TM2CNT = TM_FREQ_1024;
+    REG_TM2CNT ^= TM_ENABLE;
 
     REG_TM3CNT = TM_ENABLE | TM_CASCADE;
 
@@ -38,23 +29,12 @@ int main()
 
         // --- UPDATE INFO ---
 
-        if (REG_TM3D != sec)
-        {
-            sec = REG_TM3D;
-            sprintf(ts, "%02d:%02d:%02d | Frames: %u", sec / 3600, (sec % 3600) / 60, sec % 60, frames);
-            logOutputNoCash(0, ts);
-            frames = 0;
-        }
-
-        if (get_key_down(KEY_START))
-        {
-            REG_TM2CNT ^= TM_ENABLE;
-        }
+        print_frames_per_second(ts, REG_TM3D, sec, frames);
 
         // --- DRAW NEW INFO ---
 
         // --- SHOW NEW INFO ---
-        // vid_flip();
+        vid_flip();
     }
 
     return 0;

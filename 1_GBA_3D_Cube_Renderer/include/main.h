@@ -5,6 +5,7 @@
 #include "maths.h"
 #include "memory.h"
 #include "video.h"
+#include "timer.h"
 #include "draw.h"
 #include "input.h"
 #include "debug.h"
