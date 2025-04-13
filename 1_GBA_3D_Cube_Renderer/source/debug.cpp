@@ -1,4 +1,7 @@
 #include "debug.h"
+#include "timer.h"
+
+char debug_fps[64];
 
 extern bool logInitNoCash()
 {
@@ -21,13 +24,13 @@ extern void logOutputNoCash(unsigned char level, const char* message)
     REG_NOCASH_LOG = '\n';
 }
 
-void print_frames_per_second(char *text, vu16 timer_data, u32 &sec, u32 &frames)
+void print_frames_per_second()
 {
-    if (timer_data != sec)
+    if (REG_TM3D != get_seconds_elapsed())
     {
-        sec = timer_data;
-        sprintf(text, "Time: %02d:%02d:%02d | Frames: %u", sec / 3600, (sec % 3600) / 60, sec % 60, frames);
-        logOutputNoCash(0, text);
-        frames = 0;
+        set_seconds_elapsed(REG_TM3D);
+        sprintf(debug_fps, "Time: %02d:%02d:%02d | Frames: %u | Cycles: %u", get_seconds_elapsed() / 3600, (get_seconds_elapsed() % 3600) / 60, get_seconds_elapsed() % 60, get_frame_count(), get_frame_cycles());
+        logOutputNoCash(0, debug_fps);
+        reset_frame_count();
     }
 }
