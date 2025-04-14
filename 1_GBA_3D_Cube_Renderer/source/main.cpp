@@ -5,7 +5,6 @@
 int main()
 {
     REG_DISPCNT = DCNT_MODE4 | DCNT_BG2;
-    start_all_timers();
     setup_vid_base_pal();
     change_bg_clr(BLACK);
 
@@ -13,7 +12,6 @@ int main()
     {
         // --- WAIT FOR NEW UPDATE ---
         vid_vsync();
-        update_frame_timing();
 
         // --- REMOVE OLD INFO ---
         clear_screen();
@@ -21,14 +19,9 @@ int main()
 
         // --- UPDATE INFO ---
 
-        // Rotation Z
-
-        // Rotation X
-
         // --- DRAW NEW INFO ---
 
         // --- SHOW NEW INFO ---
-        print_frames_per_second();
         vid_flip();
     }
 
